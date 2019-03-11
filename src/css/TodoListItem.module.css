@@ -1,0 +1,63 @@
+.list-item {
+    display: flex;
+    border: 2px solid black;
+    width: 600px;
+    border-radius: 8px;
+    background-color:  rgb(190, 255, 170);
+}
+
+.check-box {
+    align-self: center;
+    margin: 11px;
+    outline: none;
+}
+
+.check-box{
+    cursor: pointer;
+}
+
+.todo-text{
+    width: 465px;
+    word-break: break-word;
+    font: message-box;
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+.btn-done {
+    color: black;
+    background-color: #39bd39;
+    width: 63px;
+    border: black;
+    font-weight: 600;
+    border-radius: 5px;
+    margin: 1px;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-delete {
+    color: black;
+    background-color: #39bd39;
+    border: black;
+    font-weight: 600;
+    border-radius: 5px;
+    margin: 1px;
+    outline: none;
+    cursor: pointer;
+}
+.btn-done:hover, .btn-delete:hover {
+    color: white;
+}
+
+.completed {
+    background-color:  rgba(190, 255, 170, 0.329);
+}
+.completed > p {
+    text-decoration: line-through;
+
+    color: white;
+}
+.completed > .btn-done::before {
+    content: 'Un-';
+}
