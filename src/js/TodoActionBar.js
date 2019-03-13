@@ -49,7 +49,7 @@ function TodoActionBar(props) {
             <button
                 className={classes['btn-delete-completed']}
                 onClick={props.deleteCompleted}>
-                {'Delete Completed'}    {/* or is this a better way? */}
+                {'Delete Completed'}    {/* or is this a better way? https://reactjs.org/docs/jsx-in-depth.html#string-literals-1*/}
             </button>
         </div>
     );

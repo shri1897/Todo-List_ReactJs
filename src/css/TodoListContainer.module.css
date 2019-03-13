@@ -1,5 +1,5 @@
 .list-container {
-    position: absolute;
-    top: 62px;
-    left: 100px;
+    flex-direction: column-reverse;
+    display: flex;
+    margin: 62px 0px 0px 92px;
 }

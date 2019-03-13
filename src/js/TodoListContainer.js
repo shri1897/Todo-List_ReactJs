@@ -11,11 +11,11 @@ const propTypes = {
 }
 
 function TodoListContainer(props) {
-    let listItems = renderTodoItems(props);
+    let todoItems = renderTodoItems(props);
 
     return (
-        <div className={classes['list-container']}>
-            {listItems}
+        <div className={classes['list-container']} >
+            {todoItems}
         </div>
     );
 }

@@ -10,7 +10,7 @@ class TodoManager extends React.Component {
         todoInputTextValue: ''
     };
 
-    constructor(props) {
+    constructor(props) {    //Use arrow functions instead of binding??
         super(props);
 
         this.addItem = this.addItem.bind(this);
