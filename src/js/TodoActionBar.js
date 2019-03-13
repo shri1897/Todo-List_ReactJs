@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import styles from '../css/TodoActionBar.module.css'
+import classes from '../css/TodoActionBar.module.css'
 
 const ENTER_KEY = 13;
 
@@ -15,39 +15,39 @@ const propTypes = {
 
 function TodoActionBar(props) {
 
-    function addItemOnEnterKeyPress(event) {
+    function addItemOnEnterKeyUp(event) {
         if (event.which === ENTER_KEY) {
             props.addItem();
         }
     }
 
     return (
-        <div className={styles['action-bar']}>
+        <div className={classes['action-bar']}>
             <input
                 type="text"
-                className={styles['text-box']}
+                className={classes['text-box']}
                 placeholder="Write something to add"
                 value={props.textValue}
                 onChange={props.handleInputTextChange}
-                onKeyPress={addItemOnEnterKeyPress}
+                onKeyUp={addItemOnEnterKeyUp}
             />
             <button
-                className={styles['btn-add']}
+                className={classes['btn-add']}
                 onClick={props.addItem}>
                 Add
             </button>
             <button
-                className={styles['btn-select-deselect-all']}
+                className={classes['btn-select-deselect-all']}
                 onClick={props.selectDeselectAll}>
                 Select/Deselect All
             </button>
             <button
-                className={styles['btn-delete-selected']}
+                className={classes['btn-delete-selected']}
                 onClick={props.deleteSelected}>
                 Delete Selected         {/* is this right? */}
             </button>
             <button
-                className={styles['btn-delete-completed']}
+                className={classes['btn-delete-completed']}
                 onClick={props.deleteCompleted}>
                 {'Delete Completed'}    {/* or is this a better way? */}
             </button>

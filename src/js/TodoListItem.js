@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import styles from '../css/TodoListItem.module.css'
+import classes from '../css/TodoListItem.module.css'
 
 const propTypes = {
     todoID: PropTypes.number.isRequired,
@@ -18,36 +18,32 @@ const defaultProps = {
 }
 
 function TodoListItem(props) {
-    let itemWrapperClassName = [styles['list-item']];   //better name?
+    let todoItemClassName = [classes['list-item']];   //better name? 
 
     if (props.completedStatus) {
-        itemWrapperClassName.push(styles['completed']);
+        todoItemClassName.push(classes['completed']);
     }
 
     return (
-        <div className={itemWrapperClassName.join(' ')} todo-id={props.todoID}>
+        <div className={todoItemClassName.join(' ')} >
             <input
                 type="checkbox"
-                className={styles['check-box']}
+                className={classes['check-box']}
                 checked={props.checkedStatus}
-                todo-action="select-item"
-                onChange={props.handleCheckedStatusChange}
+                onChange={event => props.handleCheckedStatusChange(event, props.todoID)}
             />
             <p
-                className={styles['todo-text']}
-                todo-action="todo-text">
+                className={classes['todo-text']}>
                 {props.todoText}
             </p>
             <button
-                className={styles['btn-done']}
-                todo-action="mark-done"
-                onClick={props.handleCompletedStatusChange}>
+                className={classes['btn-done']}
+                onClick={() => props.handleCompletedStatusChange(props.todoID)}>
                 Done
             </button>
             <button
-                className={styles['btn-delete']}
-                todo-action="delete-item"
-                onClick={props.deleteItem}>
+                className={classes['btn-delete']}
+                onClick={() => props.deleteItem(props.todoID)}>
                 Delete
             </button>
         </div>

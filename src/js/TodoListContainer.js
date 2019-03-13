@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import TodoListItem from './TodoListItem'
-import styles from '../css/TodoListContainer.module.css'
+import classes from '../css/TodoListContainer.module.css'
 
 const propTypes = {
     todoItems: PropTypes.array.isRequired,
@@ -11,9 +11,24 @@ const propTypes = {
 }
 
 function TodoListContainer(props) {
-    let listItems = props.todoItems.map((item) => {
+    let listItems = renderTodoItems(props);
+
+    return (
+        <div className={classes['list-container']}>
+            {listItems}
+        </div>
+    );
+}
+
+TodoListContainer.propTypes = propTypes;
+
+export default TodoListContainer;
+
+/* Helper Functions*/
+function renderTodoItems(props) {
+    return props.todoItems.map((item) => {
         return (
-            < TodoListItem
+            <TodoListItem
                 key={item.todoID}
                 todoID={item.todoID}
                 todoText={item.todoText}
@@ -25,14 +40,4 @@ function TodoListContainer(props) {
             />
         );
     });
-
-    return (
-        <div className={styles['list-container']}>
-            {listItems}
-        </div>
-    );
 }
-
-TodoListContainer.propTypes = propTypes;
-
-export default TodoListContainer;

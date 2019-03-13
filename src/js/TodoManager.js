@@ -1,11 +1,11 @@
 import React from 'react';
 import TodoActionBar from './TodoActionBar'
 import TodoListContainer from './TodoListContainer'
-import styles from '../css/TodoManager.module.css'
+import classes from '../css/TodoManager.module.css'
 
 class TodoManager extends React.Component {
 
-    state = {
+    state = {   //Inside Constructor?
         todoItems: [],
         todoInputTextValue: ''
     };
@@ -24,83 +24,78 @@ class TodoManager extends React.Component {
     }
 
     addItem() {
-        let todoItems = this.state.todoItems.slice();
+        let todoItems = [...this.state.todoItems];
         let todoText = this.state.todoInputTextValue;
         if (todoText) {
-            let todoID = Date.now();
-            todoItems.push({ todoID: todoID, todoText: todoText, checkedStatus: false, completedStatus: false });
-            this.setState({ todoItems: todoItems, todoInputTextValue: '' });
+            todoItems.push({
+                todoID: Date.now(),
+                todoText: todoText,
+                checkedStatus: false,
+                completedStatus: false
+            });
+            this.setState({ todoItems, todoInputTextValue: '' });
         }
     }
 
     selectDeselectAll() {
-        let todoItems = this.state.todoItems.slice();
+        let todoItems = [...this.state.todoItems];
         if (todoItems[0]) {
-            let check = !todoItems[0].checkedStatus;
-            todoItems.map((item) => {
-                item.checkedStatus = check;
-                return true;
+            let checkUncheck = !todoItems[0].checkedStatus;
+            todoItems.forEach((item) => {
+                item.checkedStatus = checkUncheck;
             });
-            this.setState({ todoItems: todoItems })
+            this.setState({ todoItems });
         }
     }
 
     deleteSelected() {
-        let todoItems = this.state.todoItems.slice();
-        todoItems = todoItems.filter((item) => {
+        let todoItems = this.state.todoItems.filter((item) => {
             return !item.checkedStatus;
         });
-        this.setState({ todoItems: todoItems });
+        this.setState({ todoItems });
     }
 
     deleteCompleted() {
-        let todoItems = this.state.todoItems.slice();
-        todoItems = todoItems.filter((item) => {
+        let todoItems = this.state.todoItems.filter((item) => {
             return !item.completedStatus;
         });
-        this.setState({ todoItems: todoItems });
+        this.setState({ todoItems });
     }
 
-    deleteItem(event) {
-        let todoItems = this.state.todoItems.slice();
-        let itemID = parseInt(event.target.closest('[todo-id]').getAttribute('todo-id'));
-        todoItems = todoItems.filter(item => {
-            return item.todoID !== itemID;
+    deleteItem(todoID) {
+        let todoItems = this.state.todoItems.filter(item => {
+            return item.todoID !== todoID;
         });
-        this.setState({ todoItems: todoItems })
+        this.setState({ todoItems });
     }
 
     handleInputTextChange(event) {
         this.setState({ todoInputTextValue: event.target.value });
     }
 
-    handleCheckedStatusChange(event) {
-        let todoItems = this.state.todoItems.slice();
-        let itemID = parseInt(event.target.closest('[todo-id]').getAttribute('todo-id'));
-        todoItems.map(item => {  //use binary Search using id??? or linear search with break for future proofing?
-            if (item.todoID === itemID) {
+    handleCheckedStatusChange(event, todoID) {
+        let todoItems = [...this.state.todoItems];
+        todoItems.forEach(item => {
+            if (item.todoID === todoID) {
                 item.checkedStatus = event.target.checked;
             }
-            return true;
         });
-        this.setState({ todoItems: todoItems })
+        this.setState({ todoItems });
     }
 
-    handleCompletedStatusChange(event) {
-        let todoItems = this.state.todoItems.slice();
-        let itemID = parseInt(event.target.closest('[todo-id]').getAttribute('todo-id'));
-        todoItems.map(item => { /*GENERALIZE? */ //use binary Search using id??? or linear search with break for future proofing?
-            if (item.todoID === itemID) {
+    handleCompletedStatusChange(todoID) {
+        let todoItems = [...this.state.todoItems]
+        todoItems.forEach(item => {
+            if (item.todoID === todoID) {
                 item.completedStatus = !item.completedStatus;
             }
-            return true;
         });
-        this.setState({ todoItems: todoItems })
+        this.setState({ todoItems });
     }
 
     render() {
         return (
-            <div className={styles['todo-manager']}>
+            <div className={classes['todo-manager']}>
                 < TodoActionBar
                     textValue={this.state.todoInputTextValue}
                     handleInputTextChange={this.handleInputTextChange}
