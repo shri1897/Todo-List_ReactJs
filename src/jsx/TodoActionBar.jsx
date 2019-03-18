@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as actionTypes from '../js/helper/actions/actions'
+import * as actions from '../js/helper/actions/actions'
 import classes from '../css/TodoActionBar.module.css'
 
 const ENTER_KEY = 13;
@@ -53,16 +53,13 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) { //use arrow functions like so?
+function mapDispatchToProps(dispatch) {
     return {
-        addItem: () => dispatch({ type: actionTypes.ADD_ITEM }),
-        selectDeselectAll: () => dispatch({ type: actionTypes.SELECT_DESELECT_ALL }),
-        deleteSelected: () => dispatch({ type: actionTypes.DELETE_SELECTED }),
-        deleteCompleted: () => dispatch({ type: actionTypes.DELETE_COMPLETED }),
-        handleInputTextChange: (event) => dispatch({
-            type: actionTypes.INPUT_TEXT_CHANGE,
-            data: { inputText: event.target.value }
-        })
+        addItem: () => dispatch(actions.addItem()),
+        selectDeselectAll: () => dispatch(actions.selectDeselectAll()),
+        deleteSelected: () => dispatch(actions.deleteSelected()),
+        deleteCompleted: () => dispatch(actions.deleteCompleted()),
+        handleInputTextChange: (event) => dispatch(actions.handleInputTextChange(event.target.value))
     };
 }
 

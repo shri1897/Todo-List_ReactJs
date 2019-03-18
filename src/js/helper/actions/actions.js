@@ -1,8 +1,51 @@
-export const ADD_ITEM = 'ADD_ITEM';
-export const DELETE_ITEM = 'DELETE_ITEM';
-export const DELETE_SELECTED = 'DELETE_SELECTED';
-export const DELETE_COMPLETED = 'DELETE_COMPLETED';
-export const SELECT_DESELECT_ALL = 'SELECT_DESELECT_ALL';
-export const INPUT_TEXT_CHANGE = 'INPUT_TEXT_CHANGE'
-export const CHECKED_STATUS_CHANGE = 'CHECKED_STATUS_CHANGE';
-export const COMPLETED_STATUS_CHANGE = 'COMPLETED_STATUS_CHANGE';
+export function addItem() {
+    return {
+        type: 'ADD_ITEM'
+    };
+}
+
+export function deleteItem(todoID) {
+    return {
+        type: 'DELETE_ITEM',
+        data: { todoID }
+    };
+}
+
+export function deleteSelected() {
+    return {
+        type: 'DELETE_SELECTED'
+    };
+}
+
+export function deleteCompleted() {
+    return {
+        type: 'DELETE_COMPLETED'
+    };
+}
+
+export function selectDeselectAll() {
+    return {
+        type: 'SELECT_DESELECT_ALL'
+    };
+}
+
+export function handleInputTextChange(inputText) {
+    return {
+        type: 'INPUT_TEXT_CHANGE',
+        data: { inputText }
+    };
+}
+
+export function handleCheckedStatusChange(todoID, checkedStatus) {
+    return {
+        type: 'CHECKED_STATUS_CHANGE',
+        data: { todoID, checkedStatus }
+    };
+}
+
+export function handleCompletedStatusChange(todoID) {
+    return {
+        type: 'COMPLETED_STATUS_CHANGE',
+        data: { todoID }
+    };
+}

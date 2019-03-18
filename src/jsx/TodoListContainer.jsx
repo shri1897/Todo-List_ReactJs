@@ -13,7 +13,7 @@ function TodoListContainer(props) {
     );
 }
 
-const mapStateToProps = state => {
+function mapStateToProps(state) {
     return {
         todoItems: state.todoItems
     };

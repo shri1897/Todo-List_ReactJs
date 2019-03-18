@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import * as actionTypes from '../js/helper/actions/actions'
+import * as actions from '../js/helper/actions/actions'
 import PropTypes from 'prop-types';
 import classes from '../css/TodoListItem.module.css'
 
@@ -12,7 +12,7 @@ const propTypes = {
 }
 
 function TodoListItem(props) {
-    let todoItemClassName = calculateClassName(props.completedStatus);
+    let todoItemClassName = determineClassName(props.completedStatus);
 
     return (
         <div className={todoItemClassName.join(' ')}>
@@ -42,38 +42,24 @@ function TodoListItem(props) {
 
 TodoListItem.propTypes = propTypes;
 
-const mapDispatchToProps = (dispatch, ownProps) => {    //avoid using arrow function like this?
-    function deleteItem() {
-        dispatch({
-            type: actionTypes.DELETE_ITEM,
-            data: { todoID: ownProps.todoID }
-        });
-    }
-
-    function handleCheckedStatusChange(event) {
-        dispatch({
-            type: actionTypes.CHECKED_STATUS_CHANGE,
-            data: { todoID: ownProps.todoID, checkedStatus: event.target.checked }
-        });
-    }
-
-    function handleCompletedStatusChange() {
-        dispatch({
-            type: actionTypes.COMPLETED_STATUS_CHANGE,
-            data: { todoID: ownProps.todoID }
-        });
-    }
+function mapDispatchToProps(dispatch, ownProps) {
 
     return {
-        deleteItem,
-        handleCheckedStatusChange,
-        handleCompletedStatusChange
-    }
+        deleteItem: () => dispatch(
+            actions.deleteItem(ownProps.todoID)
+        ),
+        handleCompletedStatusChange: () => dispatch(
+            actions.handleCompletedStatusChange(ownProps.todoID)
+        ),
+        handleCheckedStatusChange: (event) => dispatch(
+            actions.handleCheckedStatusChange(ownProps.todoID, event.target.checked)
+        )
+    };
 }
 
 export default connect(null, mapDispatchToProps)(TodoListItem);
 
-function calculateClassName(completedStatus) {
+function determineClassName(completedStatus) {
     let todoItemClassName = [classes.listItem];
     if (completedStatus) {
         todoItemClassName.push(classes.completed);
