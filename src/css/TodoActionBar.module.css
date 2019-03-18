@@ -1,4 +1,4 @@
-.action-bar{    
+.actionBar{    
     background-color: #23a303;
     position: fixed;
     top: 0px;
@@ -7,7 +7,7 @@
     padding: 1px 0px 0px 100px;
 }
 
-.text-box {
+.textBox {
     border-radius: 10px;
     border: 2px solid black;
     text-align: center;
@@ -18,11 +18,11 @@
     outline: none;
 }
 
-.text-box ::placeholder {
+.textBox ::placeholder {
     color: #bbb8b8;
 }
 
-.btn-add{
+.btnAdd{
     color: #ffffff;
     background-color: #303030;
     border: 1px solid black;
@@ -35,7 +35,7 @@
     font-size: 14px;
 }
 
-.btn-select-deselect-all{
+.btnSelectDeselectAll{
     color: #ffffff;
     background-color: #303030;
     border: 1px solid black;
@@ -48,7 +48,7 @@
     font-size: 14px;
 }
 
-.btn-delete-selected{
+.btnDeleteSelected{
     color: #ffffff;
     background-color: #303030;
     border: 1px solid black;
@@ -61,7 +61,7 @@
     font-size: 14px;
 }
 
-.btn-delete-completed{
+.btnDeleteCompleted{
     color: #ffffff;
     background-color: #303030;
     border: 1px solid black;
@@ -74,8 +74,8 @@
     font-size: 14px;
 }
 
-.btn-add:hover, .btn-select-deselect-all:hover,
- .btn-delete-selected:hover, .btn-delete-completed:hover {
+.btnAdd:hover, .btnSelectDeselectAll:hover,
+ .btnDeleteSelected:hover, .btnDeleteCompleted:hover {
     color: #56ff3b;
     background-color: #202020;
     font-size: 14px;
