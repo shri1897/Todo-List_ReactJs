@@ -21,15 +21,15 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps)(TodoListContainer);
 
-function renderTodoItems(todoItems) {  //MOVE TO DIFFERENT FILE?
+function renderTodoItems(todoItems) {
     return todoItems.map((item) => {
         return (
             <TodoListItem
                 key={item.todoID}
                 todoID={item.todoID}
                 todoText={item.todoText}
-                completedStatus={item.completedStatus}
                 checkedStatus={item.checkedStatus}
+                completedStatus={item.completedStatus}
             />
         );
     });
