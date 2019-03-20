@@ -43,7 +43,6 @@ function TodoListItem(props) {
 TodoListItem.propTypes = propTypes;
 
 function mapDispatchToProps(dispatch, ownProps) {
-
     return {
         deleteItem: () => dispatch(
             actions.deleteItem(ownProps.todoID)
