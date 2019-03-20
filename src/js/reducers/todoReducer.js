@@ -9,61 +9,43 @@ const initialState = {
 function todoReducer(state = initialState, action) {    //rename all the functions
     switch (action.type) {
         case actionTypes.ADD_ITEM:
-            {
-                return stateAfterAddingItem(state);
-            }
+            return stateAfterAddingItem(state, action.data);
 
         case actionTypes.DELETE_ITEM:
-            {
-                return stateAfterDeletingItem(state, action);
-            }
+            return stateAfterDeletingItem(state, action.data);
 
         case actionTypes.DELETE_SELECTED:
-            {
-                return stateAfterDeletingSelected(state);
-            }
+            return stateAfterDeletingSelected(state);
 
         case actionTypes.DELETE_COMPLETED:
-            {
-                return stateAfterDeletingCompleted(state);
-            }
+            return stateAfterDeletingCompleted(state);
 
         case actionTypes.SELECT_DESELECT_ALL:
-            {
-                return stateAfterSelectingDeselecting(state);
-            }
-
-        case actionTypes.INPUT_TEXT_CHANGE:
-            {
-                return { ...state, todoInputText: action.data.inputText };
-            }
+            return stateAfterSelectingDeselecting(state);
 
         case actionTypes.CHECKED_STATUS_CHANGE:
-            {
-                return stateAfterChangingCheckedStatus(state, action);
-            }
+            return stateAfterChangingCheckedStatus(state, action.data);
 
         case actionTypes.COMPLETED_STATUS_CHANGE:
-            {
-                return stateAfterChangingCompletedStatus(state, action);
-            }
+            return stateAfterChangingCompletedStatus(state, action.data);
+
+        case actionTypes.INPUT_TEXT_CHANGE:
+            return { ...state, todoInputText: action.data.inputText };
 
         default:
-            {
-                return state;
-            }
+            return state;
     }
 }
 
-
 export default todoReducer;
 
-function stateAfterAddingItem(state) {
+
+function stateAfterAddingItem(state, data) {
     let todoItems = deepCopy(state.todoItems);
     let todoText = state.todoInputText;
     if (todoText) {
         todoItems.push({
-            todoID: Date.now(),
+            todoID: data.todoID,
             todoText: todoText,
             checkedStatus: false,
             completedStatus: false
@@ -74,9 +56,9 @@ function stateAfterAddingItem(state) {
     }
 }
 
-function stateAfterDeletingItem(state, action) {
+function stateAfterDeletingItem(state, data) {
     let todoItems = deepCopy(state.todoItems);
-    let todoID = action.data.todoID;
+    let todoID = data.todoID;
     todoItems = todoItems.filter(item => {
         return item.todoID !== todoID;
     });
@@ -120,20 +102,20 @@ function stateAfterSelectingDeselecting(state) {
     }
 }
 
-function stateAfterChangingCheckedStatus(state, action) {
+function stateAfterChangingCheckedStatus(state, data) {
     let todoItems = deepCopy(state.todoItems);
     todoItems.forEach(item => {
-        if (item.todoID === action.data.todoID) {
-            item.checkedStatus = action.data.checkedStatus;
+        if (item.todoID === data.todoID) {
+            item.checkedStatus = data.checkedStatus;
         }
     });
     return { ...state, todoItems };
 }
 
-function stateAfterChangingCompletedStatus(state, action) {
+function stateAfterChangingCompletedStatus(state, data) {
     let todoItems = deepCopy(state.todoItems);
     todoItems.forEach(item => {
-        if (item.todoID === action.data.todoID) {
+        if (item.todoID === data.todoID) {
             item.completedStatus = !item.completedStatus;
         }
     });

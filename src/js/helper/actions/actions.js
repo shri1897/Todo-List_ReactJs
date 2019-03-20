@@ -1,6 +1,7 @@
 export function addItem() {
     return {
-        type: 'ADD_ITEM'
+        type: 'ADD_ITEM',
+        data: { todoID: Date.now() }
     };
 }
 
